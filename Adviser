@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasetsart CourseTrack - Advisor Portal (ระบบสำหรับอาจารย์ที่ปรึกษา)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ku: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                            dark: '#022c22'
+                        }
+                    },
+                    fontFamily: { sans: ['Sarabun', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Sarabun', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col md:flex-row antialiased">
+
+    <!-- Sidebar เมนูด้านข้างสำหรับอาจารย์ -->
+    <aside class="w-full md:w-72 bg-ku-dark text-white flex-shrink-0 flex flex-col justify-between shadow-xl">
+        <div>
+            <!-- Header Branding -->
+            <div class="p-6 border-b border-ku-800/60 flex items-center space-x-4">
+                <div class="w-12 h-12 bg-amber-500 rounded-2xl flex items-center justify-center font-extrabold text-2xl text-slate-900 shadow-lg">
+                    KU
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-lg tracking-wide text-white leading-none">CourseTrack</h1>
+                    <p class="text-[11px] text-amber-400 font-medium tracking-wider mt-1">ADVISOR PORTAL</p>
+                </div>
+            </div>
+
+            <!-- Profile อาจารย์ที่ปรึกษา -->
+            <div class="p-4 mx-3 my-4 bg-ku-900/80 rounded-xl border border-ku-800 flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-amber-100 text-ku-900 font-bold flex items-center justify-center flex-shrink-0 border-2 border-amber-400">
+                    ส
+                </div>
+                <div class="overflow-hidden">
+                    <p class="text-sm font-bold text-slate-100 truncate">ผศ.ดร. สมชาย ใจดี</p>
+                    <p class="text-xs text-amber-300 font-mono">อาจารย์ที่ปรึกษา</p>
+                    <p class="text-[10px] text-slate-300 truncate">ภาควิชาเทคโนโลยีการศึกษา</p>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="px-3 space-y-1.5">
+                <a href="#" class="flex items-center space-x-3 px-4 py-3 bg-amber-600 rounded-xl text-slate-900 font-bold shadow-md transition">
+                    <i data-lucide="users" class="w-5 h-5"></i>
+                    <span class="text-sm">ภาพรวมนิสิตในความดูแล</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-4 py-3 hover:bg-ku-800/60 rounded-xl text-emerald-100/80 hover:text-white transition">
+                    <i data-lucide="alert-triangle" class="w-5 h-5 text-rose-400"></i>
+                    <span class="text-sm">นิสิตกลุ่มเสี่ยง (Early Warning)</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-4 py-3 hover:bg-ku-800/60 rounded-xl text-emerald-100/80 hover:text-white transition">
+                    <i data-lucide="file-search" class="w-5 h-5"></i>
+                    <span class="text-sm">อนุมัติคำขอแผนการเรียน</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-4 py-3 hover:bg-ku-800/60 rounded-xl text-emerald-100/80 hover:text-white transition">
+                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                    <span class="text-sm">ส่งข้อความถึงนิสิต</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="p-4 m-3 bg-ku-900/40 rounded-xl border border-ku-800/50 text-xs text-emerald-300/70">
+            <p class="text-[11px] text-slate-300">สาขาวิชาเทคโนโลยีดิจิทัลเพื่อการศึกษา</p>
+            <p class="text-[10px] text-slate-400 mt-1">คณะศึกษาศาสตร์ มก.</p>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+
+        <!-- Top Bar Header -->
+        <header class="bg-white border-b border-slate-200 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm flex-shrink-0">
+            <div>
+                <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                    <i data-lucide="user-check" class="w-6 h-6 text-amber-600"></i>
+                    ระบบอาจารย์ที่ปรึกษา (Advisor Dashboard)
+                </h2>
+                <p class="text-xs text-slate-500 mt-0.5">ติดตามผลการเรียน กลุ่มเสี่ยง และความก้าวหน้าของนิสิตในความดูแล</p>
+            </div>
+
+            <!-- Search & Filter Bar -->
+            <div class="flex items-center space-x-3">
+                <div class="relative">
+                    <i data-lucide="search" class="w-4 h-4 absolute left-3 top-2.5 text-slate-400"></i>
+                    <input type="text" id="searchStudent" onkeyup="filterStudents()" placeholder="ค้นหารหัสนิสิต หรือชื่อ-สกุล..." class="pl-9 pr-4 py-2 border border-slate-300 rounded-xl text-xs w-64 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Body Scrollable Area -->
+        <div class="flex-1 overflow-y-auto p-6 space-y-6">
+
+            <!-- Summary KPI Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold text-slate-400 uppercase">นิสิตในความดูแลทั้งหมด</span>
+                        <div class="p-2 bg-slate-100 rounded-xl text-slate-600"><i data-lucide="users" class="w-5 h-5"></i></div>
+                    </div>
+                    <div class="mt-3 flex items-baseline justify-between">
+                        <span class="text-3xl font-extrabold text-slate-800">28</span>
+                        <span class="text-xs text-slate-500">คน</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-2">รุ่นปีการศึกษา 2565 - 2568</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold text-slate-400 uppercase">สถานะปกติ (On Track)</span>
+                        <div class="p-2 bg-emerald-50 rounded-xl text-emerald-600"><i data-lucide="check-circle-2" class="w-5 h-5"></i></div>
+                    </div>
+                    <div class="mt-3 flex items-baseline justify-between">
+                        <span class="text-3xl font-extrabold text-emerald-600">22</span>
+                        <span class="text-xs text-slate-500">คน (78.5%)</span>
+                    </div>
+                    <p class="text-[11px] text-emerald-600 font-medium mt-2">ผลการเรียนตามเกณฑ์ปกติ</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold text-slate-400 uppercase">เฝ้าระวัง / ติดเงื่อนไข</span>
+                        <div class="p-2 bg-amber-50 rounded-xl text-amber-600"><i data-lucide="alert-circle" class="w-5 h-5"></i></div>
+                    </div>
+                    <div class="mt-3 flex items-baseline justify-between">
+                        <span class="text-3xl font-extrabold text-amber-600">4</span>
+                        <span class="text-xs text-slate-500">คน</span>
+                    </div>
+                    <p class="text-[11px] text-amber-600 font-medium mt-2">ขาดวิชาตัวต่อ / เกรดเฉลี่ยต่ำ</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold text-slate-400 uppercase">เสี่ยงติด Probation</span>
+                        <div class="p-2 bg-rose-50 rounded-xl text-rose-600"><i data-lucide="alert-triangle" class="w-5 h-5"></i></div>
+                    </div>
+                    <div class="mt-3 flex items-baseline justify-between">
+                        <span class="text-3xl font-extrabold text-rose-600">2</span>
+                        <span class="text-xs text-slate-500">คน</span>
+                    </div>
+                    <p class="text-[11px] text-rose-600 font-medium mt-2">GPAX ต่ำกว่า 2.00 (ต้องการคำปรึกษาด่วน)</p>
+                </div>
+            </div>
+
+            <!-- Student List Table (ตารางติดตามรายชื่อนิสิต) -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base">รายชื่อนิสิตในความดูแล (Advisor Student List)</h3>
+                        <p class="text-xs text-slate-500">คลิกที่รายชื่อนิสิตเพื่อดูภาพรวม Dashboard หรือส่งคำแนะนำรายบุคคล</p>
+                    </div>
+                    <select id="filterStatus" onchange="filterStudents()" class="p-2 border border-slate-300 rounded-xl text-xs font-medium focus:ring-2 focus:ring-amber-500">
+                        <option value="ALL">แสดงสถานะทั้งหมด</option>
+                        <option value="CRITICAL">เฉพาะเสี่ยงสูง (Critical)</option>
+                        <option value="WARNING">เฉพาะเฝ้าระวัง (Warning)</option>
+                        <option value="NORMAL">เฉพาะปกติ (On Track)</option>
+                    </select>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-600">
+                        <thead class="bg-slate-50 text-xs text-slate-500 uppercase border-b border-slate-100">
+                            <tr>
+                                <th class="p-4">รหัสนิสิต / ชื่อ-สกุล</th>
+                                <th class="p-4">ชั้นปี</th>
+                                <th class="p-4">GPAX สะสม</th>
+                                <th class="p-4">หน่วยกิตสะสม</th>
+                                <th class="p-4">ความก้าวหน้า (% Progress)</th>
+                                <th class="p-4">สถานะระบบ</th>
+                                <th class="p-4 text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="advisorTableBody" class="divide-y divide-slate-100">
+                            <!-- แถวนิสิตจะถูกเรนเดอร์โดย JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modal สำหรับดูรายละเอียดนิสิตรายบุคคล (Student Detail Drawer/Modal) -->
+    <div id="studentModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-5 mx-4 border border-slate-200">
+            <div class="flex justify-between items-start border-b pb-4">
+                <div>
+                    <span id="modalYear" class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full font-bold">ชั้นปีที่ 3</span>
+                    <h3 id="modalName" class="text-xl font-bold text-slate-800 mt-1">น.ส. กรณิศา รักเรียน</h3>
+                    <p id="modalId" class="text-xs text-slate-500 font-mono">รหัสนิสิต: 6612345678</p>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+
+            <!-- รายละเอียดคะแนนและประเด็นเตือน -->
+            <div class="grid grid-cols-3 gap-3 text-center">
+                <div class="p-3 bg-slate-50 rounded-xl border">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">GPAX สะสม</p>
+                    <p id="modalGpax" class="text-xl font-extrabold text-indigo-600 mt-1">3.28</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">หน่วยกิตที่ได้</p>
+                    <p id="modalCredits" class="text-xl font-extrabold text-teal-600 mt-1">110 / 135</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">ความก้าวหน้า</p>
+                    <p id="modalProgress" class="text-xl font-extrabold text-emerald-600 mt-1">81.48%</p>
+                </div>
+            </div>
+
+            <!-- กล่องข้อความแจ้งเตือนปัญหารายบุคคล -->
+            <div id="modalAlertBox" class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl">
+                <p class="text-xs font-bold text-amber-800">ข้อควรระวัง / เงื่อนไขที่ติดขัด:</p>
+                <p id="modalAlertText" class="text-xs text-amber-700 mt-1">ยังไม่ได้ลงเรียนวิชา 01234567 การวิจัยทางการศึกษา ซึ่งเป็นวิชาบังคับก่อน</p>
+            </div>
+
+            <!-- ฟอร์มให้อาจารย์ส่งข้อความถึงนิสิต -->
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">ส่งข้อความคำแนะนำถึงนิสิต (Direct Advice):</label>
+                <textarea id="advisorNote" rows="3" placeholder="พิมพ์ข้อความให้คำแนะนำ เพื่อส่งไปยังหน้า Dashboard ของนิสิต..." class="w-full p-3 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"></textarea>
+            </div>
+
+            <div class="flex justify-end space-x-3 pt-2">
+                <button onclick="closeModal()" class="px-4 py-2 border border-slate-300 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50">ยกเลิก</button>
+                <button onclick="sendAdvice()" class="px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-xs shadow-md">ส่งคำแนะนำถึงนิสิต</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript - พฤติกรรมการทำงานของระบบอาจารย์ -->
+    <script>
+        // ข้อมูลจำลองนิสิตในความดูแลของอาจารย์ที่ปรึกษา
+        const studentsData = [
+            { id: "6612345678", name: "น.ส. กรณิศา รักเรียน", year: "ปี 3", gpax: 3.28, credits: 110, progress: 81.48, status: "WARNING", alert: "ยังไม่ได้ลงเรียนวิชา 01234567 การวิจัยทางการศึกษา (วิชาตัวต่อ)" },
+            { id: "6510400001", name: "นาย สมชาย สายเรียน", year: "ปี 4", gpax: 3.85, credits: 135, progress: 100.00, status: "NORMAL", alert: "ไม่มีข้อพบบกพร่อง เรียนครบโครงสร้างหลักสูตรแล้ว" },
+            { id: "6610400003", name: "นาย ธนกฤต ตั้งใจ", year: "ปี 2", gpax: 1.85, credits: 42, progress: 31.11, status: "CRITICAL", alert: "เสี่ยงติด Probation! เกรดเฉลี่ยต่ำกว่า 2.00 ควรเข้าพบอาจารย์" },
+            { id: "6510400002", name: "น.ส. พิมพา เรียนดี", year: "ปี 4", gpax: 2.45, credits: 98, progress: 72.59, status: "WARNING", alert: "ขาดวิชาเลือกเฉพาะอีก 12 หน่วยกิต เกรงว่าจะไม่จบตามกำหนด" },
+            { id: "6710400005", name: "นาย ณัฐพล การดี", year: "ปี 1", gpax: 3.12, credits: 36, progress: 26.66, status: "NORMAL", alert: "เรียนตามแผนการเรียนปกติ" }
+        ];
+
+        let selectedStudent = null;
+
+        // วาดตารางแสดงรายการนิสิต
+        function renderStudentTable(data) {
+            const tbody = document.getElementById('advisorTableBody');
+            tbody.innerHTML = '';
+
+            data.forEach(s => {
+                let statusBadge = '';
+                if (s.status === 'NORMAL') {
+                    statusBadge = `<span class="px-2.5 py-1 bg-emerald-100 text-emerald-700 font-semibold text-xs rounded-full">✓ ปกติ (On Track)</span>`;
+                } else if (s.status === 'WARNING') {
+                    statusBadge = `<span class="px-2.5 py-1 bg-amber-100 text-amber-700 font-semibold text-xs rounded-full">⚠️ เฝ้าระวัง / ขาดวิชา</span>`;
+                } else {
+                    statusBadge = `<span class="px-2.5 py-1 bg-rose-100 text-rose-700 font-bold text-xs rounded-full animate-pulse">🚨 เสี่ยงสูง (Critical)</span>`;
+                }
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition";
+                tr.innerHTML = `
+                    <td class="p-4">
+                        <div class="font-bold text-slate-800">${s.name}</div>
+                        <div class="text-xs text-slate-400 font-mono">${s.id}</div>
+                    </td>
+                    <td class="p-4 text-xs font-semibold text-slate-600">${s.year}</td>
+                    <td class="p-4 font-extrabold ${s.gpax < 2.0 ? 'text-rose-600' : 'text-slate-800'}">${s.gpax.toFixed(2)}</td>
+                    <td class="p-4 text-xs font-mono">${s.credits} / 135 นก.</td>
+                    <td class="p-4">
+                        <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden w-28">
+                            <div class="bg-ku-700 h-full" style="width: ${s.progress}%"></div>
+                        </div>
+                        <span class="text-[10px] text-slate-500 mt-1 block">${s.progress}%</span>
+                    </td>
+                    <td class="p-4">${statusBadge}</td>
+                    <td class="p-4 text-center">
+                        <button onclick="openModal('${s.id}')" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 rounded-lg text-xs font-bold transition">
+                            🔍 ดูรายละเอียด / เตือน
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // ค้นหาและกรองนิสิต
+        function filterStudents() {
+            const searchValue = document.getElementById('searchStudent').value.toLowerCase();
+            const statusValue = document.getElementById('filterStatus').value;
+
+            const filtered = studentsData.filter(s => {
+                const matchesSearch = s.name.toLowerCase().includes(searchValue) || s.id.includes(searchValue);
+                const matchesStatus = statusValue === 'ALL' || s.status === statusValue;
+                return matchesSearch && matchesStatus;
+            });
+
+            renderStudentTable(filtered);
+        }
+
+        // เปิด Modal ส่องดูรายละเอียดนิสิต
+        function openModal(studentId) {
+            selectedStudent = studentsData.find(s => s.id === studentId);
+            if (!selectedStudent) return;
+
+            document.getElementById('modalName').innerText = selectedStudent.name;
+            document.getElementById('modalId').innerText = `รหัสนิสิต: ${selectedStudent.id}`;
+            document.getElementById('modalYear').innerText = selectedStudent.year;
+            document.getElementById('modalGpax').innerText = selectedStudent.gpax.toFixed(2);
+            document.getElementById('modalCredits').innerText = `${selectedStudent.credits} / 135`;
+            document.getElementById('modalProgress').innerText = `${selectedStudent.progress}%`;
+            document.getElementById('modalAlertText').innerText = selectedStudent.alert;
+
+            document.getElementById('studentModal').classList.remove('hidden');
+        }
+
+        // ปิด Modal
+        function closeModal() {
+            document.getElementById('studentModal').classList.add('hidden');
+            document.getElementById('advisorNote').value = '';
+        }
+
+        // ส่งคำแนะนำถึงนิสิต
+        function sendAdvice() {
+            const note = document.getElementById('advisorNote').value;
+            if (!note.trim()) {
+                alert('กรุณากรอกข้อความคำแนะนำก่อนส่ง');
+                return;
+            }
+            alert(`ส่งคำแนะนำถึง ${selectedStudent.name} เรียบร้อยแล้ว!\nข้อความจะไปปรากฏบนหน้า Dashboard ของนิสิต`);
+            closeModal();
+        }
+
+        // โหลดข้อมูลเมื่อเปิดหน้า
+        window.onload = function() {
+            renderStudentTable(studentsData);
+            lucide.createIcons();
+        };
+    </script>
+</body>
+</html>
